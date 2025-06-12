@@ -1,5 +1,5 @@
 ﻿using DaeteckNetworkAPI.Models;
-using DaeteckNetworkAPI.Services;
+using DaeteckNetworkOpenAPI.Services.ClientService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,8 +10,8 @@ namespace DaeteckNetworkAPI.Controllers
     [ApiController]
     public class ClientController : ControllerBase
     {
-        private readonly IClientService _clientService;
-        public ClientController(IClientService clientService)
+        private readonly IClientServices _clientService;
+        public ClientController(IClientServices clientService)
         {
             _clientService = clientService;
         }

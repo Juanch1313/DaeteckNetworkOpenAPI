@@ -1,8 +1,8 @@
 ﻿using DaeteckNetworkAPI.Models;
 
-namespace DaeteckNetworkAPI.Services
+namespace DaeteckNetworkOpenAPI.Services.ClientService
 {
-    public interface IClientService
+    public interface IClientServices
     {
         List<Client> GetAllClientsAsync();
         Client? GetClientByIdAsync(string id);

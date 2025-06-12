@@ -5,9 +5,9 @@ using tik4net;
 using tik4net.Objects;
 using tik4net.Objects.Queue;
 
-namespace DaeteckNetworkAPI.Services
+namespace DaeteckNetworkOpenAPI.Services.ClientService
 {
-    public class ClientServices : IClientService
+    public class ClientServices : IClientServices
     {
         private readonly string Ip;
         private readonly string UsernameRead;

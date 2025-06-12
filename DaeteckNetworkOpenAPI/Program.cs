@@ -1,4 +1,7 @@
-using DaeteckNetworkAPI.Services;
+using DaeteckNetworkOpenAPI.Services.ClientService;
+using DaeteckNetworkOpenAPI.Services.ODBService;
+using DaeteckNetworkOpenAPI.Services.ONUService;
+using DaeteckNetworkOpenAPI.Services.ZoneService;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,14 +11,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 
-//Configure HttpClient for external API calls
-builder.Services.AddHttpClient("microtik", client =>
+//Add CORS policy to allow requests from any origin
+builder.Services.AddCors(options =>
 {
-    client.BaseAddress = new Uri("http://177.242.140.138/rest/");
+    options.AddPolicy("AllowAllOrigins",
+        builder => builder.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
 });
 
 // Register the client service
-builder.Services.AddScoped<IClientService, ClientServices>();
+builder.Services.AddScoped<IClientServices, ClientServices>();
+builder.Services.AddScoped<IONUServices, ONUServices>();
+builder.Services.AddScoped<IZoneServices, ZoneServices>();
+builder.Services.AddScoped<IODBServices, ODBServices>();
 
 builder.Services.AddOpenApi();
 
@@ -29,6 +38,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 
